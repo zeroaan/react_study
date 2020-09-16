@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, NavLink, useParams } from "react-router-dom";
+import { Route, Link, useParams } from "react-router-dom";
 
 let contents = [
   { id: 1, title: "HTML", desc: "HTML is ..." },
@@ -31,7 +31,7 @@ const Topics = (props) => {
   for (let i = 0; i < contents.length; i++) {
     lis.push(
       <li key={contents[i].id}>
-        <NavLink to={"/topics/" + contents[i].id}>{contents[i].title}</NavLink>
+        <Link to={"/topics/" + contents[i].id}>{contents[i].title}</Link>
       </li>
     );
   }
