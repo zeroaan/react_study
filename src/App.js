@@ -1,129 +1,76 @@
-import React, { Component } from "react";
-import Subject from "./components/Subject";
-import Control from "./components/Control";
-import Nav from "./components/Nav";
-import ReadContent from "./components/ReadContent";
-import CreateContent from "./components/CreateContent";
-import UpdateContent from "./components/UpdateContent";
+import React, { Component, useState } from "react";
 import "./App.css";
 
-class App extends Component {
+function App() {
+  return (
+    <div className="container">
+      <h1>Function, Class</h1>
+      <FuncComp initNumber={3} />
+      <ClassComp initNumber={3} />
+    </div>
+  );
+}
+
+const FuncComp = (props) => {
+  const numberState = useState(props.initNumber);
+  const _number = numberState[0];
+  const setNumber = numberState[1];
+
+  // const dateState = useState(new Date().toString());
+  // const _date = dateState[0];
+  // const setDate = dateState[1];
+
+  const [_date, setDate] = useState(new Date().toString());
+
+  return (
+    <div className="container">
+      <h2>FuncComp</h2>
+      <p>Number: {_number}</p>
+      <p>Date: {_date}</p>
+      <input
+        type="button"
+        value="change date"
+        onClick={function () {
+          setNumber(Math.round(Math.random() * 100));
+        }}
+      />
+      <input
+        type="button"
+        value="change date"
+        onClick={function () {
+          setDate(new Date().toString());
+        }}
+      />
+    </div>
+  );
+};
+
+class ClassComp extends Component {
   state = {
-    mode: "welcome",
-    selected_content_id: 1,
-    subject: { title: "WEB", sub: "World Wide Web!" },
-    welcome: { title: "Welcome", desc: "Hello, React!!!" },
-    contents: [
-      { id: 1, title: "HTML", desc: "HTML is for information" },
-      { id: 2, title: "CSS", desc: "CSS is for design" },
-      { id: 3, title: "JavaScript", desc: "JavaScript is for interactive" },
-    ],
+    number: this.props.initNumber,
+    date: new Date().toString(),
   };
-  getReadContent() {
-    var i = 0;
-    while (i < this.state.contents.length) {
-      var data = this.state.contents[i];
-      if (data.id === this.state.selected_content_id) {
-        return data;
-      }
-      i = i + 1;
-    }
-  }
-  getContent() {
-    var _title,
-      _desc,
-      _article = null;
-    if (this.state.mode === "welcome") {
-      _title = this.state.welcome.title;
-      _desc = this.state.welcome.desc;
-      _article = <ReadContent title={_title} desc={_desc} />;
-    } else if (this.state.mode === "read") {
-      var _content = this.getReadContent();
-      _article = <ReadContent title={_content.title} desc={_content.desc} />;
-    } else if (this.state.mode === "create") {
-      _article = (
-        <CreateContent
-          onSubmit={function (title, desc) {
-            var _contents = Array.from(this.state.contents);
-            _contents.push({
-              id: this.state.contents.length + 1,
-              title: title,
-              desc: desc,
-            });
-            this.setState({
-              contents: _contents,
-              mode: "read",
-              selected_content_id: this.state.contents.length + 1,
-            });
-          }.bind(this)}
-        />
-      );
-    } else if (this.state.mode === "update") {
-      _content = this.getReadContent();
-      _article = (
-        <UpdateContent
-          data={_content}
-          onSubmit={function (id, title, desc) {
-            var _contents = Array.from(this.state.contents);
-            var i = 0;
-            while (i < _contents.length) {
-              if (_contents[i].id === id) {
-                _contents[i] = { id: id, title: title, desc: desc };
-                break;
-              }
-              i = i + 1;
-            }
-            this.setState({
-              contents: _contents,
-              mode: "read",
-            });
-          }.bind(this)}
-        />
-      );
-    }
-    return _article;
-  }
+
   render() {
     return (
-      <div>
-        <Subject
-          title={this.state.subject.title}
-          sub={this.state.subject.sub}
-          onChangePage={function () {
-            this.setState({ mode: "welcome" });
+      <div className="container">
+        <h2>ClassComp</h2>
+        <p>Number: {this.state.number}</p>
+        <p>Date: {this.state.date}</p>
+        <input
+          type="button"
+          value="change number"
+          onClick={function () {
+            this.setState({ number: Math.round(Math.random() * 100) });
           }.bind(this)}
         />
-        <Nav
-          data={this.state.contents}
-          onChangePage={function (id) {
-            this.setState({ mode: "read", selected_content_id: Number(id) });
+        <input
+          type="button"
+          value="change date"
+          onClick={function () {
+            this.setState({ date: new Date().toString() });
           }.bind(this)}
         />
-        <Control
-          onChangeMode={function (mode) {
-            if (mode === "delete") {
-              if (window.confirm("really?")) {
-                var _contents = Array.from(this.state.contents);
-                var i = 0;
-                while (i < _contents.length) {
-                  if (_contents[i].id === this.state.selected_content_id) {
-                    _contents.splice(i, 1);
-                    break;
-                  }
-                  i = i + 1;
-                }
-                this.setState({
-                  mode: "welcome",
-                  contents: _contents,
-                });
-                alert("deleted");
-              }
-            } else {
-              this.setState({ mode: mode });
-            }
-          }.bind(this)}
-        />
-        {this.getContent()}
       </div>
     );
   }
