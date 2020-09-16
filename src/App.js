@@ -1,79 +1,86 @@
-import React, { Component, useState } from "react";
+import React from "react";
 import "./App.css";
+import { Switch, Route, NavLink, useParams } from "react-router-dom";
 
 function App() {
   return (
     <div className="container">
-      <h1>Function, Class</h1>
-      <FuncComp initNumber={3} />
-      <ClassComp initNumber={3} />
+      <h1 className="title">React Router DOM example</h1>
+      <div className="nav">
+        <NavLink to="/" exact={true}>
+          Home
+        </NavLink>
+        <NavLink to="/topics">Topics</NavLink>
+        <NavLink to="/contact">Contact</NavLink>
+      </div>
+      <Switch>
+        <Route path="/" exact={true} component={Home} />
+        <Route path="/topics" component={Topics} />
+        <Route path="/contact" component={Contact} />
+        <Route path="/">Not found</Route>
+      </Switch>
     </div>
   );
 }
 
-const FuncComp = (props) => {
-  const numberState = useState(props.initNumber);
-  const _number = numberState[0];
-  const setNumber = numberState[1];
-
-  // const dateState = useState(new Date().toString());
-  // const _date = dateState[0];
-  // const setDate = dateState[1];
-
-  const [_date, setDate] = useState(new Date().toString());
-
+const Home = (props) => {
   return (
-    <div className="container">
-      <h2>FuncComp</h2>
-      <p>Number: {_number}</p>
-      <p>Date: {_date}</p>
-      <input
-        type="button"
-        value="change date"
-        onClick={function () {
-          setNumber(Math.round(Math.random() * 100));
-        }}
-      />
-      <input
-        type="button"
-        value="change date"
-        onClick={function () {
-          setDate(new Date().toString());
-        }}
-      />
+    <div>
+      <h2>Home</h2>
+      Home...
     </div>
   );
 };
 
-class ClassComp extends Component {
-  state = {
-    number: this.props.initNumber,
-    date: new Date().toString(),
+let contents = [
+  { id: 1, title: "HTML", desc: "HTML is ..." },
+  { id: 2, title: "JS", desc: "JS is ..." },
+  { id: 3, title: "REACT", desc: "REACT is ..." },
+];
+const Topic = (props) => {
+  let params = useParams();
+  let topic_id = params.topic_id;
+  let selected_topic = {
+    title: "Sorry",
+    desc: "Not found",
   };
-
-  render() {
-    return (
-      <div className="container">
-        <h2>ClassComp</h2>
-        <p>Number: {this.state.number}</p>
-        <p>Date: {this.state.date}</p>
-        <input
-          type="button"
-          value="change number"
-          onClick={function () {
-            this.setState({ number: Math.round(Math.random() * 100) });
-          }.bind(this)}
-        />
-        <input
-          type="button"
-          value="change date"
-          onClick={function () {
-            this.setState({ date: new Date().toString() });
-          }.bind(this)}
-        />
-      </div>
+  for (let i = 0; i < contents.length; i++) {
+    if (contents[i].id === Number(topic_id)) {
+      selected_topic = contents[i];
+      break;
+    }
+  }
+  return (
+    <div>
+      <h3>{selected_topic.title}</h3>
+      {selected_topic.desc}
+    </div>
+  );
+};
+const Topics = (props) => {
+  let lis = [];
+  for (let i = 0; i < contents.length; i++) {
+    lis.push(
+      <li key={contents[i].id}>
+        <NavLink to={"/topics/" + contents[i].id}>{contents[i].title}</NavLink>
+      </li>
     );
   }
-}
+  return (
+    <div>
+      <h2>Topics</h2>
+      <ul>{lis}</ul>
+      <Route path="/topics/:topic_id" component={Topic} />
+    </div>
+  );
+};
+const Contact = (props) => {
+  return (
+    <div>
+      <h2>Contact</h2>
+      Contact...
+    </div>
+  );
+};
 
 export default App;

@@ -5,3 +5,6 @@
 
 ### comp_func_class (src_02)
 - function component와 class component 비교
+
+### Router, route (src_03)
+- BrowserRouter, HashRouter, Switch, Route, Link, NavLink, useParams 사용법
