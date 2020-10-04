@@ -18,7 +18,7 @@ function App() {
   };
   return (
     <div className="container">
-      <h2>hello</h2>
+      <h1>hello</h1>
       <h3>{data}</h3>
       <button onClick={plusData}>Plus</button>
       <button onClick={minusData}>Minus</button>
