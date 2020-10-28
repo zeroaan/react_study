@@ -19,3 +19,9 @@
 - Ajax 사용하기
 
 ### React hooks
+
+<br>
+
+### styled-components (src_05)
+
+- 버튼과 같이 자주 사용되는 컴포넌트를 스타일 입혀 만들어줌
