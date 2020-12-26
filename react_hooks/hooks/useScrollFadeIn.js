@@ -1,15 +1,6 @@
 import { useRef, useEffect, useCallback } from "react";
 
 const useScrollFadeIn = (threshold = 0.7, direction = "up", duration = 1, delay = 0) => {
-  if (
-    typeof threshold !== "number" ||
-    typeof direction !== "string" ||
-    typeof duration !== "number" ||
-    typeof delay !== "number"
-  ) {
-    return;
-  }
-
   const element = useRef();
 
   const handleDirection = (name) => {

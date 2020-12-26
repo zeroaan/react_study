@@ -1,10 +1,6 @@
 import { useRef, useEffect } from "react";
 
 const useFadeIn = (direction = "", duration = 1, delay = 0) => {
-  if (typeof direction !== "string" || typeof duration !== "number" || typeof delay !== "number") {
-    return;
-  }
-
   const element = useRef();
 
   const handleDirection = (name) => {
