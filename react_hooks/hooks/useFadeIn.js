@@ -14,7 +14,7 @@ const useFadeIn = (direction = "", duration = 1, delay = 0) => {
       case "right":
         return "translate3d(-25%, 0, 0)";
       default:
-        return;
+        return "scale(0.75)";
     }
   };
 
@@ -24,7 +24,7 @@ const useFadeIn = (direction = "", duration = 1, delay = 0) => {
     if (current) {
       current.style.transition = `all ${duration}s cubic-bezier(0, 0, 0.2, 1) ${delay}s`;
       current.style.opacity = 1;
-      current.style.transform = `translate3d(0, 0, 0)`;
+      current.style.transform = `translate3d(0, 0, 0) scale(1)`;
     }
   }, [duration, delay]);
 
