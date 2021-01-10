@@ -1,5 +1,11 @@
 .skill {
-  margin: 10px;
+  margin: 5px;
+  padding: 4px 8px;
   color: black;
+  background-color: rgb(203, 255, 203);
   text-decoration: none;
+  transition: all 0.3s ease;
+  &:hover {
+    background-color: rgb(107, 194, 107);
+  }
 }
