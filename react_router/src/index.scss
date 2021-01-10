@@ -1,11 +1,46 @@
+.navbar {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  > a {
+    color: black;
+    font-size: 30px;
+    text-decoration: none;
+    margin: 0 10px;
+  }
+}
+
 .skill {
-  margin: 5px;
-  padding: 4px 8px;
-  color: black;
-  background-color: rgb(203, 255, 203);
-  text-decoration: none;
-  transition: all 0.3s ease;
-  &:hover {
-    background-color: rgb(107, 194, 107);
+  text-align: center;
+  margin-top: 40px;
+  > a {
+    margin: 5px;
+    padding: 6px 12px;
+    color: black;
+    background-color: rgb(203, 255, 203);
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    &:hover {
+      background-color: rgb(107, 194, 107);
+    }
+  }
+}
+
+.skill__desc {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 1000px;
+  margin: 50px auto;
+
+  > h1 {
+    font-size: 30px;
+  }
+
+  > p {
+    font-size: 16px;
   }
 }
