@@ -1,10 +1,38 @@
-@mixin primary($size) {
-  color: rgb(0, 110, 255);
-  font-size: $size;
+$primary: rgb(0, 110, 255);
+$size: 300px;
+
+@mixin primary($fontSsize) {
+  color: $primary;
+  font-size: $fontSsize;
 }
 
-.app {
+.box {
   > h1 {
     @include primary(26px);
   }
+}
+
+.box2 {
+  $color: rgb(199, 75, 75) !global;
+  width: $size;
+  height: $size;
+  line-height: $size;
+  text-align: center;
+  background-color: $primary;
+  font: {
+    weight: bold;
+    size: 18px;
+  }
+  border: {
+    bottom: 3px solid black;
+    radius: 50%;
+  }
+  margin: {
+    top: 100px;
+    left: 100px;
+  }
+}
+
+.box3 {
+  color: $color;
 }
