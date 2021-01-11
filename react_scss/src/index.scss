@@ -1,0 +1,10 @@
+@mixin primary($size) {
+  color: rgb(0, 110, 255);
+  font-size: $size;
+}
+
+.app {
+  > h1 {
+    @include primary(26px);
+  }
+}
