@@ -55,8 +55,31 @@ $size: 300px;
 
 @mixin dash-line($width, $color) {
   border: $width dashed $color;
+  @content;
 }
 
 .mixin2 {
-  @include dash-line(2px, red);
+  @include dash-line(2px, red) {
+    color: blue;
+  }
+}
+
+$max-width: 980px;
+
+@function columns($number: 1, $columns: 12) {
+  @return $max-width * ($number / $columns);
+}
+
+.box_group {
+  width: $max-width;
+
+  .box1 {
+    width: columns(); // 1
+  }
+  .box2 {
+    width: columns(8);
+  }
+  .box3 {
+    width: columns(3);
+  }
 }
