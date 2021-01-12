@@ -14,6 +14,9 @@ const App = () => {
 
       <div className="box2">중첩</div>
       <div className="box3">전역</div>
+
+      <h1 className="mixin">mixin & include</h1>
+      <h1 className="mixin2">mixin parameters</h1>
     </>
   )
 }

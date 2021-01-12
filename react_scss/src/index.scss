@@ -36,3 +36,27 @@ $size: 300px;
 .box3 {
   color: $color;
 }
+
+@mixin large-text {
+  font: {
+    size: 22px;
+    weight: bold;
+    family: sans-serif;
+  }
+  color: orange;
+
+  &::after {
+    content: "!!";
+  }
+}
+.mixin {
+  @include large-text;
+}
+
+@mixin dash-line($width, $color) {
+  border: $width dashed $color;
+}
+
+.mixin2 {
+  @include dash-line(2px, red);
+}
